@@ -24,7 +24,35 @@ $(function () {
   // current hour in 24-hour time?
   //
 
+function timeCheck() {
 
+  //Get current hour as 24 hours
+  var currentHour = dayjs().format('H')
+
+  $('.time-block').each(function () {
+    var blockTime = parseInt($(this).attr('id').split('hour')[1]);
+
+    if(blockTime < currentHour) {
+      $(this).removeClass('future');
+      $(this).removeClass('present');
+      $(this).addClass('past');
+    }
+
+    else if (blockTime === currentHour) {
+      $(this).removeClass('future');
+      $(this).addClass('present');
+      $(this).removeClass('past');
+    }
+
+    else {
+      $(this).addClass('future');
+      $(this).removeClass('present');
+      $(this).removeClass('past');
+    }
+
+  })
+
+}
 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
@@ -45,4 +73,6 @@ $('#hour-17 .description').val(localStorage.getItem('hour-17'));
   // TODO: Add code to display the current date in the header of the page.
   var today = dayjs().format('dddd, MMMM D')
   $('#currentDay').text(today);
+
+  timeCheck();
 });

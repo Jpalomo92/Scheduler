@@ -8,36 +8,13 @@ $(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  
 
+  $( '.saveBtn' ).on('click', function() {
 
+    var toDo = $(this).siblings('.description').val();
+    var time = $(this).parent().attr('id');
 
-  $( 'button' ).on('click', function() {
-
-    var schedules = [...localStorage.getItem('schedules')]
-    schedules.map((schedule)=> {
-      if (schedule.key !== $(this).parent().prop('id')){
-        schedules.push(
-          {
-            key: $(this).parent().prop('id'),
-            value: $(this).prev().val()
-          }
-        )
-      }
-    })
-
-    localStorage.setItem('schedules', schedules);
-    schedules.map((schedule)=> {
-      //TO DO: get text area and edit the value property on text area make it 
-      //equal to schedule.value
-      var hr9 = document.getElementById(schedule.key);
-      hr9.value = schedule.value;
-    })
-
-  
-
-
-    
+    localStorage.setItem(time, toDo)
   });
 
   // TODO: Add code to apply the past, present, or future class to each time
@@ -47,37 +24,23 @@ $(function () {
   // current hour in 24-hour time?
   //
 
-  var currentHour = dayjs().format('H'); // returns 0-23 thats based on a 24 hour clock
-  var idHour = document.querySelector('div id')
 
-  for (var i = currentHour; i < 18; i++) {
-      if (i < idHour) {
-          document.getElementById(i.toString()).classList.add('past');
-      } else if (i === idHour) {
-          document.getElementById(i.toString()).classList.add('present');
-      } else if (i > idHour) {
-          document.getElementById(i.toString()).classList.add('future');
-      }
-  }
 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  var get9 = localStorage.getItem($('button').parent().prop('id'), $(button).prev().val());
-  document.getElementById('hour-9').value = get9
-  
-  var get10 = localStorage.getItem($('button').parent().prop('hour-10'));
-  document.getElementById('hour-10').value = get10
-  
-  
-  var get9 = localStorage.getItem($(button).parent().prop('id'), $(button).prev().val());
-  document.getElementById('hour-11').value = get9
-  
-  var get10 = localStorage.getItem($('button').parent().prop('hour-12'));
-  document.getElementById('hour-12').value = get10
+ //
 
-
+$('#hour-9 .description').val(localStorage.getItem('hour-9'));
+$('#hour-10 .description').val(localStorage.getItem('hour-10'));
+$('#hour-11 .description').val(localStorage.getItem('hour-11'));
+$('#hour-12 .description').val(localStorage.getItem('hour-12'));
+$('#hour-13 .description').val(localStorage.getItem('hour-13'));
+$('#hour-14 .description').val(localStorage.getItem('hour-14'));
+$('#hour-15 .description').val(localStorage.getItem('hour-15'));
+$('#hour-16 .description').val(localStorage.getItem('hour-16'));
+$('#hour-17 .description').val(localStorage.getItem('hour-17'));
 
   // TODO: Add code to display the current date in the header of the page.
   var today = dayjs().format('dddd, MMMM D')

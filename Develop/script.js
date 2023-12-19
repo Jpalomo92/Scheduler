@@ -30,8 +30,8 @@ function timeCheck() {
   var currentHour = dayjs().format('H')
 
   $('.time-block').each(function () {
-    var blockTime = parseInt($(this).attr('id').split('hour')[1]);
-
+    var blockTime = parseInt($(this).attr('id').split('hour')[1]);//gets id, splits the string and pulls the 1 index
+    //compares the id number of each class 'time-block' to the current time
     if(blockTime < currentHour) {
       $(this).removeClass('future');
       $(this).removeClass('present');
